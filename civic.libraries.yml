@@ -4,3 +4,6 @@ global:
       dist/civic.css: {}
   js:
     dist/civic.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
