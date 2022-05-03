@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Accordion paragraph component.
+ * CivicTheme Accordion paragraph component.
  */
 
 use Drupal\paragraphs\Entity\Paragraph;
@@ -10,7 +10,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_accordion(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_accordion(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $accordion_title = $paragraph->get('field_c_p_title')->first();

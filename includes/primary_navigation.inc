@@ -10,8 +10,8 @@ use Drupal\block\Entity\Block;
 /**
  * Implements template_preprocess_block__HOOK().
  */
-function civic_preprocess_block__menu_block__civic_primary_navigation(&$variables) {
-  $variables['theme'] = theme_get_setting('civic_header_theme') ?? 'light';
+function civictheme_preprocess_block__menu_block__civictheme_primary_navigation(&$variables) {
+  $variables['theme'] = theme_get_setting('civictheme_header_theme') ?? 'light';
   $variables['items'] = $variables['content']['#items'];
   $variables['title'] = $variables['configuration']['label_display'] ? $variables['configuration']['label'] : '';
 
@@ -19,7 +19,7 @@ function civic_preprocess_block__menu_block__civic_primary_navigation(&$variable
   $region = $block->getRegion();
 
   if (strpos($region, 'header') === 0) {
-    $variables['modifier_class'] = 'civic-justify-content-end';
+    $variables['modifier_class'] = 'civictheme-justify-content-end';
   }
 
   if (strpos($region, 'sidebar') === 0) {

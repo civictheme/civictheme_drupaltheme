@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Accordion paragraph component.
+ * CivicTheme Accordion paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -10,7 +10,7 @@ use Drupal\Component\Utility\UrlHelper;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_map(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_map(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $variables['url'] = $paragraph->get('field_c_p_embed_url')->getString();

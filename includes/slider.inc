@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Slider paragraph component.
+ * CivicTheme Slider paragraph component.
  */
 
 use Drupal\Core\Url;
@@ -10,12 +10,12 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_slider(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_slider(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  _civic_preprocess_paragraph__field__theme($variables);
-  _civic_preprocess_paragraph__field__title($variables);
+  _civictheme_preprocess_paragraph__field__theme($variables);
+  _civictheme_preprocess_paragraph__field__title($variables);
 
   $variables['previous_label'] = t('Previous');
   $variables['next_label'] = t('Next');
@@ -40,15 +40,15 @@ function civic_preprocess_paragraph__civic_slider(&$variables) {
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_slider_slide(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_slider_slide(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
-  _civic_preprocess_paragraph__field__theme($variables);
-  _civic_preprocess_paragraph__field__title($variables);
-  _civic_preprocess_paragraph__card__image($variables);
+  _civictheme_preprocess_paragraph__field__theme($variables);
+  _civictheme_preprocess_paragraph__field__title($variables);
+  _civictheme_preprocess_paragraph__card__image($variables);
 
-  $variables['attributes']['data-component-civic-slider-slide'] = '';
+  $variables['attributes']['data-component-civictheme-slider-slide'] = '';
 
   // Image position.
   if ($paragraph->hasField('field_c_p_image_position') && !$paragraph->get('field_c_p_image_position')->isEmpty()) {
@@ -65,7 +65,7 @@ function civic_preprocess_paragraph__civic_slider_slide(&$variables) {
       ];
     }
     $variables['content_top']['slide_topics'] = [
-      '#theme' => 'civic_slider_slide_tags',
+      '#theme' => 'civictheme_slider_slide_tags',
       '#tags' => $topics,
     ];
   }
@@ -87,7 +87,7 @@ function civic_preprocess_paragraph__civic_slider_slide(&$variables) {
       'url' => Url::fromUri($link->get('uri')->getString()),
     ];
     $variables['links']['slide_links'] = [
-      '#theme' => 'civic_slider_slide_links',
+      '#theme' => 'civictheme_slider_slide_links',
       '#component_theme' => $inverse_theme,
       '#links' => $links,
     ];

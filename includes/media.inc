@@ -10,7 +10,7 @@ use Drupal\Core\Template\Attribute;
 /**
  * Implements hook_preprocess__HOOK().
  */
-function civic_preprocess_media__civic_image(&$variables) {
+function civictheme_preprocess_media__civictheme_image(&$variables) {
   if (empty($variables['media'])) {
     return;
   }
@@ -35,7 +35,7 @@ function civic_preprocess_media__civic_image(&$variables) {
 /**
  * Implements hook_preprocess__HOOK().
  */
-function civic_preprocess_media__civic_video(&$variables) {
+function civictheme_preprocess_media__civictheme_video(&$variables) {
   if (empty($variables['media'])) {
     return;
   }
@@ -52,15 +52,15 @@ function civic_preprocess_media__civic_video(&$variables) {
   }
 
   if (!empty($variables['sources'])) {
-    _civic_preprocess_media__civic_video_links($variables);
-    _civic_preprocess_media__civic_video_transcript($variables);
+    _civictheme_preprocess_media__civictheme_video_links($variables);
+    _civictheme_preprocess_media__civictheme_video_transcript($variables);
   }
 }
 
 /**
  * Implements hook_preprocess__HOOK().
  */
-function civic_preprocess_media__civic_remote_video(&$variables) {
+function civictheme_preprocess_media__civictheme_remote_video(&$variables) {
   if (empty($variables['media'])) {
     return;
   }
@@ -92,8 +92,8 @@ function civic_preprocess_media__civic_remote_video(&$variables) {
 
     $variables['raw_source'] = $html;
 
-    _civic_preprocess_media__civic_video_links($variables);
-    _civic_preprocess_media__civic_video_transcript($variables);
+    _civictheme_preprocess_media__civictheme_video_links($variables);
+    _civictheme_preprocess_media__civictheme_video_transcript($variables);
   }
   catch (Exception $e) {
     // Handling any oEmbed exceptions in rendering remote video.
@@ -101,9 +101,9 @@ function civic_preprocess_media__civic_remote_video(&$variables) {
 }
 
 /**
- * Pre-process civic_video media links.
+ * Pre-process civictheme_video media links.
  */
-function _civic_preprocess_media__civic_video_links(&$variables) {
+function _civictheme_preprocess_media__civictheme_video_links(&$variables) {
   if (empty($variables['media'])) {
     return;
   }
@@ -150,9 +150,9 @@ function _civic_preprocess_media__civic_video_links(&$variables) {
 }
 
 /**
- * Pre-process civic_video media transcript.
+ * Pre-process civictheme_video media transcript.
  */
-function _civic_preprocess_media__civic_video_transcript(&$variables) {
+function _civictheme_preprocess_media__civictheme_video_transcript(&$variables) {
   // Show transcript on the media landing page.
   if ($variables['view_mode'] == 'full') {
     if (!empty($variables['content']['field_c_m_transcript'])) {

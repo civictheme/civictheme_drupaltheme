@@ -8,40 +8,40 @@
 /**
  * Generic setter of global variables for nodes as card renders.
  */
-function _civic_preprocess_node__card(&$variables) {
+function _civictheme_preprocess_node__card(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   $type = $node->getType();
   unset($variables['date']);
-  $type_callback = '_civic_preprocess_node__' . $type . '__summary';
+  $type_callback = '_civictheme_preprocess_node__' . $type . '__summary';
   if (function_exists($type_callback)) {
     $type_callback($variables);
   }
   $variables['title'] = $node->getTitle();
-  civic_attributes_to_modifier_class($variables);
-  _civic_preprocess_node__theme($variables);
+  civictheme_attributes_to_modifier_class($variables);
+  _civictheme_preprocess_node__theme($variables);
 }
 
 /**
  * Preprocess.
  */
-function _civic_preprocess_node__civic_card_event(&$variables) {
-  _civic_preprocess_node__card($variables);
-  _civic_preprocess_node__date($variables);
-  _civic_preprocess_node__thumbnail($variables);
-  _civic_preprocess_node__topics($variables);
+function _civictheme_preprocess_node__civictheme_card_event(&$variables) {
+  _civictheme_preprocess_node__card($variables);
+  _civictheme_preprocess_node__date($variables);
+  _civictheme_preprocess_node__thumbnail($variables);
+  _civictheme_preprocess_node__topics($variables);
 }
 
 /**
- * Pre-process reference Theme fields for Civic Nodes.
+ * Pre-process reference Theme fields for CivicTheme Nodes.
  */
-function _civic_preprocess_node__theme(&$variables) {
+function _civictheme_preprocess_node__theme(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if (isset($node->_referringItem)) {
     /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
     $referring_paragraph = $node->_referringItem->getEntity();
-    if ($theme = _civic_paragraph_get_theme($referring_paragraph)) {
+    if ($theme = _civictheme_paragraph_get_theme($referring_paragraph)) {
       $variables['theme'] = $theme;
     }
   }
@@ -50,40 +50,40 @@ function _civic_preprocess_node__theme(&$variables) {
 /**
  * Pre-process a Node for navigation_card view mode.
  */
-function _civic_preprocess_node__civic_card_navigation(&$variables) {
-  _civic_preprocess_node__card($variables);
-  _civic_preprocess_node__thumbnail($variables);
+function _civictheme_preprocess_node__civictheme_card_navigation(&$variables) {
+  _civictheme_preprocess_node__card($variables);
+  _civictheme_preprocess_node__thumbnail($variables);
 }
 
 /**
- * Pre-process a Node for civic_subject view mode.
+ * Pre-process a Node for civictheme_subject view mode.
  */
-function _civic_preprocess_node__civic_card_promo(&$variables) {
+function _civictheme_preprocess_node__civictheme_card_promo(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
-  $variables['date'] = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'civic_short_date');
-  _civic_preprocess_node__card($variables);
-  _civic_preprocess_node__thumbnail($variables);
-  _civic_preprocess_node__topics($variables);
+  $variables['date'] = \Drupal::service('date.formatter')->format($node->getCreatedTime(), 'civictheme_short_date');
+  _civictheme_preprocess_node__card($variables);
+  _civictheme_preprocess_node__thumbnail($variables);
+  _civictheme_preprocess_node__topics($variables);
 }
 
 /**
- * Pre-process a Node for civic_card_subject view mode.
+ * Pre-process a Node for civictheme_card_subject view mode.
  */
-function _civic_preprocess_node__civic_card_subject(&$variables) {
-  _civic_preprocess_node__card($variables);
-  _civic_preprocess_node__thumbnail($variables);
+function _civictheme_preprocess_node__civictheme_card_subject(&$variables) {
+  _civictheme_preprocess_node__card($variables);
+  _civictheme_preprocess_node__thumbnail($variables);
 }
 
 /**
  * Pre-process date field.
  */
-function _civic_preprocess_node__date(&$variables) {
+function _civictheme_preprocess_node__date(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if ($node->hasField('field_c_n_date')) {
     if ($date_range = $node->get('field_c_n_date')->getValue()) {
-      $variables['date'] = civic_format_short_date($date_range[0]['value']);
+      $variables['date'] = civictheme_format_short_date($date_range[0]['value']);
     }
   }
 }
@@ -91,7 +91,7 @@ function _civic_preprocess_node__date(&$variables) {
 /**
  * Topic field preprocessor.
  */
-function _civic_preprocess_node__topics(&$variables) {
+function _civictheme_preprocess_node__topics(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if ($node->hasField('field_c_n_topics')) {
@@ -106,19 +106,19 @@ function _civic_preprocess_node__topics(&$variables) {
 /**
  * Pre-process image thumbnail for nodes.
  */
-function _civic_preprocess_node__thumbnail(&$variables) {
+function _civictheme_preprocess_node__thumbnail(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if ($node->hasField('field_c_n_thumbnail') && !$node->get('field_c_n_thumbnail')->isEmpty()) {
     $media = $node->get('field_c_n_thumbnail')->first()->get('entity')->getTarget()->getValue();
-    $variables['image'] = civic_media_image_process_variables($media);
+    $variables['image'] = civictheme_media_image_process_variables($media);
   }
 }
 
 /**
- * Pre-process Summary for civic_page nodes.
+ * Pre-process Summary for civictheme_page nodes.
  */
-function _civic_preprocess_node__civic_page__summary(&$variables) {
+function _civictheme_preprocess_node__civictheme_page__summary(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if ($node->hasField('field_c_n_summary') && !$node->get('field_c_n_summary')->isEmpty()) {
@@ -127,9 +127,9 @@ function _civic_preprocess_node__civic_page__summary(&$variables) {
 }
 
 /**
- * Pre-process Summary for civic_event.
+ * Pre-process Summary for civictheme_event.
  */
-function _civic_preprocess_node__civic_event__summary(&$variables) {
+function _civictheme_preprocess_node__civictheme_event__summary(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   if ($node->hasField('field_c_n_body') && !$node->get('field_c_n_body')->isEmpty()) {

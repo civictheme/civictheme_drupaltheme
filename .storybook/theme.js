@@ -5,7 +5,7 @@ import { create } from '@storybook/theming';
 
 export default create({
   base: 'light',
-  brandTitle: 'Civic',
-  brandUrl: 'https://github.com/salsadigitalauorg/civic-theme',
-  brandImage: './assets/logos/civic_logo_desktop_light.png',
+  brandTitle: 'CivicTheme',
+  brandUrl: 'https://github.com/salsadigitalauorg/civictheme-theme',
+  brandImage: './assets/logos/civictheme_logo_desktop_light.png',
 });

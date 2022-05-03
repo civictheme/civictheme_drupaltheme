@@ -14,17 +14,17 @@ use Drupal\Core\Template\AttributeArray;
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
-function civic_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+function civictheme_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
   // Determine whether we render a large filter or a basic filter.
   // If the view exposed form has more than one filter we render a large
   // filter.
-  $is_civic_large_filter = _civic_get_number_of_exposed_form_elements($form) > 1;
-  $form['#attributes']['data-civic-filter-type'] = $is_civic_large_filter ? 'large' : 'basic';
-  $form['#attributes']['data-civic-filter-ajax-submit-timeout'] = $is_civic_large_filter ? 500 : 0;
-  $form['#attributes']['data-civic-filter'] = '';
-  $form['#large_filter'] = $is_civic_large_filter;
+  $is_civictheme_large_filter = _civictheme_get_number_of_exposed_form_elements($form) > 1;
+  $form['#attributes']['data-civictheme-filter-type'] = $is_civictheme_large_filter ? 'large' : 'basic';
+  $form['#attributes']['data-civictheme-filter-ajax-submit-timeout'] = $is_civictheme_large_filter ? 500 : 0;
+  $form['#attributes']['data-civictheme-filter'] = '';
+  $form['#large_filter'] = $is_civictheme_large_filter;
   $ajax_filter = $form_state->get('view')->ajaxEnabled();
-  $form['#attributes']['data-civic-filter-ajax'] = $ajax_filter ? 'true' : 'false';
+  $form['#attributes']['data-civictheme-filter-ajax'] = $ajax_filter ? 'true' : 'false';
   // Ajax exposed view forms hides submit button to have auto-load.
   if ($ajax_filter) {
     $form['actions']['submit']['#attributes']['class'][] = 'hide-xxs';
@@ -32,22 +32,22 @@ function civic_form_views_exposed_form_alter(&$form, FormStateInterface $form_st
   }
   else {
     $form['actions']['submit']['#attributes']['class'] = [
-      'civic-button--secondary',
-      'civic-button--small',
+      'civictheme-button--secondary',
+      'civictheme-button--small',
     ];
   }
   foreach ($form as $key => &$element) {
     if (strpos($key, '#') === 0 || empty($element['#type'])) {
       continue;
     }
-    _civic_form_alter__convert_exposed_form_elements($element, $form, $is_civic_large_filter);
+    _civictheme_form_alter__convert_exposed_form_elements($element, $form, $is_civictheme_large_filter);
   }
 }
 
 /**
  * Counts how many filters are in the form.
  */
-function _civic_get_number_of_exposed_form_elements($form) {
+function _civictheme_get_number_of_exposed_form_elements($form) {
   $num_of_elements = 0;
   foreach ($form as $key => &$element) {
     if (strpos($key, '#') === 0 || empty($element['#type'])
@@ -61,9 +61,9 @@ function _civic_get_number_of_exposed_form_elements($form) {
 }
 
 /**
- * Alter form elements to work within civic large and basic filters.
+ * Alter form elements to work within civictheme large and basic filters.
  */
-function _civic_form_alter__convert_exposed_form_elements(&$element, $form, $is_large_filter) {
+function _civictheme_form_alter__convert_exposed_form_elements(&$element, $form, $is_large_filter) {
   // Convert select to either radio buttons or checkboxes.
   if ($element['#type'] === 'select') {
     if (!empty($element['#multiple'])) {
@@ -73,13 +73,13 @@ function _civic_form_alter__convert_exposed_form_elements(&$element, $form, $is_
     else {
       $element['#type'] = 'radios';
     }
-    _civic_form_alter__modify_element_callbacks($element);
+    _civictheme_form_alter__modify_element_callbacks($element);
   }
   // Only radio buttons and checkboxes work with filter chips.
   $filter_key = !$is_large_filter && in_array($element['#type'], [
     'radios',
     'checkboxes',
-  ]) ? '#civic-basic-filter' : '#civic-large-filter';
+  ]) ? '#civictheme-basic-filter' : '#civictheme-large-filter';
   $element[$filter_key] = $form['#id'];
   $element['#attributes'][$filter_key] = $form['#id'];
 }
@@ -87,7 +87,7 @@ function _civic_form_alter__convert_exposed_form_elements(&$element, $form, $is_
 /**
  * Implements template_preprocess_input().
  */
-function civic_preprocess_input(&$variables) {
+function civictheme_preprocess_input(&$variables) {
   $variables['state'] = 'none';
   if (isset($variables['attributes']['class'])) {
     $variables['modifier_class'] = implode(' ', $variables['attributes']['class']);
@@ -103,7 +103,7 @@ function civic_preprocess_input(&$variables) {
 /**
  * Implements template_preprocess_select().
  */
-function civic_preprocess_select(&$variables) {
+function civictheme_preprocess_select(&$variables) {
   if (isset($variables['attributes']['class'])) {
     $variables['modifier_class'] = implode(' ', $variables['attributes']['class']);
     unset($variables['attributes']['class']);
@@ -113,7 +113,7 @@ function civic_preprocess_select(&$variables) {
 /**
  * Implements template_preprocess_form_element().
  */
-function civic_preprocess_form_element(&$variables) {
+function civictheme_preprocess_form_element(&$variables) {
   // Handle any malformed attribute class properties.
   $variables['attributes']['class'] = $variables['attributes']['class'] ?? [];
   $variables['attributes']['class'] = is_string($variables['attributes']['class']) ? [$variables['attributes']['class']] : $variables['attributes']['class'];
@@ -153,7 +153,7 @@ function civic_preprocess_form_element(&$variables) {
     $variables['description_modifier_class'] = implode(' ', $variables['description']['attributes']['class']->value());
   }
 
-  _civic_preprocess_civic_filter_form_element_alter($variables);
+  _civictheme_preprocess_civictheme_filter_form_element_alter($variables);
 }
 
 /**
@@ -162,7 +162,7 @@ function civic_preprocess_form_element(&$variables) {
  * Since we are converting select to checkboxes or radios we need to modify the
  * pre_render and process callbacks that do not relate to new inputs.
  */
-function _civic_form_alter__modify_element_callbacks(&$element) {
+function _civictheme_form_alter__modify_element_callbacks(&$element) {
   $element_class = $element['#type'] === 'radios' ? '\Drupal\Core\Render\Element\Radios' : '\Drupal\Core\Render\Element\Checkboxes';
 
   // Unsetting pre-render as we do not need these.
@@ -193,22 +193,22 @@ function _civic_form_alter__modify_element_callbacks(&$element) {
 }
 
 /**
- * Pre-process form elements used in civic large and basic filters.
+ * Pre-process form elements used in civictheme large and basic filters.
  */
-function _civic_preprocess_civic_filter_form_element_alter(&$variables) {
+function _civictheme_preprocess_civictheme_filter_form_element_alter(&$variables) {
   $element = $variables['element'];
-  if (isset($element['#civic-large-filter'])) {
+  if (isset($element['#civictheme-large-filter'])) {
     $variables['type'] = $element['#type'];
     $variables['filter_text'] = $element['#title'];
     $variables['options_title'] = $element['#description'] ?? '';
     $variables['is_inline'] = FALSE;
     $variables['inline_change_breakpoint'] = '>=m';
-    $variables['filter_group'] = $element['#civic-large-filter'];
+    $variables['filter_group'] = $element['#civictheme-large-filter'];
     if (isset($variables['description'])) {
       unset($variables['description']);
     }
   }
-  elseif (isset($element['#attributes']['#civic-large-filter'])) {
+  elseif (isset($element['#attributes']['#civictheme-large-filter'])) {
     if (isset($element['#type']) && in_array($element['#type'], [
       'radio',
       'checkbox',
@@ -217,14 +217,14 @@ function _civic_preprocess_civic_filter_form_element_alter(&$variables) {
       $variables['attributes'] = new Attribute($variables['#attributes']);
     }
   }
-  elseif (isset($element['#attributes']['#civic-basic-filter'])) {
+  elseif (isset($element['#attributes']['#civictheme-basic-filter'])) {
     $variables['text'] = $element['#title'] ?? '';
     $variables['is_multiple'] = $element['#type'] === 'checkbox';
     $variables['id'] = $element['#attributes']['id'];
     $variables['name'] = $element['#attributes']['name'];
     unset($element['#attributes']['name']);
     unset($element['#attributes']['id']);
-    unset($element['#attributes']['#civic-basic-filter']);
+    unset($element['#attributes']['#civictheme-basic-filter']);
     if (!empty($element['#attributes']['checked'])) {
       $variables['is_selected'] = TRUE;
     }
@@ -235,7 +235,7 @@ function _civic_preprocess_civic_filter_form_element_alter(&$variables) {
 /**
  * Implements template_preprocess_form_element_label().
  */
-function civic_preprocess_form_element_label(&$variables) {
+function civictheme_preprocess_form_element_label(&$variables) {
   $variables['content'] = $variables['title'] ?? '';
 
   // Adding in core template classes.
@@ -253,7 +253,7 @@ function civic_preprocess_form_element_label(&$variables) {
 /**
  * Implements template_preprocess_fieldset().
  */
-function civic_preprocess_fieldset(&$variables) {
+function civictheme_preprocess_fieldset(&$variables) {
   // Add core drupal form classes.
   $variables['attributes']['class'] = $variables['attributes']['class'] ?? [];
   $variables['attributes']['class'] = array_merge($variables['attributes']['class'], [
@@ -309,29 +309,29 @@ function civic_preprocess_fieldset(&$variables) {
 /**
  * Implements template_preprocess_checkboxes().
  */
-function civic_preprocess_checkboxes(&$variables) {
-  _civic_preprocess_composite_form_elements($variables);
+function civictheme_preprocess_checkboxes(&$variables) {
+  _civictheme_preprocess_composite_form_elements($variables);
 }
 
 /**
  * Implements template_preprocess_radios().
  */
-function civic_preprocess_radios(&$variables) {
-  _civic_preprocess_composite_form_elements($variables);
+function civictheme_preprocess_radios(&$variables) {
+  _civictheme_preprocess_composite_form_elements($variables);
 }
 
 /**
  * Helper function to pre-process radios and checkboxes composite form elements.
  */
-function _civic_preprocess_composite_form_elements(&$variables) {
+function _civictheme_preprocess_composite_form_elements(&$variables) {
   $element = &$variables['element'];
-  if (isset($element['#civic-large-filter'])) {
+  if (isset($element['#civictheme-large-filter'])) {
     $variables['type'] = $element['#type'];
     $variables['filter_text'] = $element['#title'];
     $variables['options_title'] = $element['#description'] ?? '';
     $variables['is_inline'] = FALSE;
     $variables['inline_change_breakpoint'] = '>=m';
-    $variables['filter_group'] = $element['#civic-large-filter'];
+    $variables['filter_group'] = $element['#civictheme-large-filter'];
     $variables['#attributes']['data-dropdown-filter-fieldset'] = '';
     if (!empty($variables['attributes'])) {
       $variables['#attributes'] += $variables['attributes'];
@@ -345,7 +345,7 @@ function _civic_preprocess_composite_form_elements(&$variables) {
   }
   else {
     // Standard theme wrapper for checkboxes was removed to allow for
-    // civic large filter checkboxes and so we need to add it back as a
+    // civictheme large filter checkboxes and so we need to add it back as a
     // pre-process function as we cannot add a pre_render function at theme
     // level.
     $variables['required'] = $element['#required'] ?? FALSE;
@@ -365,12 +365,12 @@ function _civic_preprocess_composite_form_elements(&$variables) {
 /**
  * Implements hook_element_info_alter().
  */
-function civic_element_info_alter(array &$types) {
+function civictheme_element_info_alter(array &$types) {
   if (isset($types['checkboxes'])) {
     // Checkboxes adds a wrapping fieldset to the checkboxes element
     // which we do not want when rendering dropdown filters.
     // The fieldset wrapper is added back manually for all other fieldsets.
-    // @see civic_preprocess_checkboxes
+    // @see civictheme_preprocess_checkboxes
     unset($types['checkboxes']['#pre_render']);
   }
 
@@ -378,7 +378,7 @@ function civic_element_info_alter(array &$types) {
     // Radios adds a wrapping fieldset to the checkboxes element
     // which we do not want when rendering dropdown filters.
     // The fieldset wrapper is added back manually for all other fieldsets.
-    // @see civic_preprocess_checkboxes
+    // @see civictheme_preprocess_checkboxes
     unset($types['radios']['#pre_render']);
   }
 }

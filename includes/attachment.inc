@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Attachment paragraph component.
+ * CivicTheme Attachment paragraph component.
  */
 
 use Drupal\file\Entity\File;
@@ -10,7 +10,7 @@ use Drupal\file\Entity\File;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_attachment(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_attachment(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
@@ -24,7 +24,7 @@ function civic_preprocess_paragraph__civic_attachment(&$variables) {
         $url = $file->createFileUrl(FALSE);
         $file_size = format_size($file->getSize());
         $mime_type = $file->getMimeType();
-        $icon = _civic_attachment_file_icon_map($mime_type);
+        $icon = _civictheme_attachment_file_icon_map($mime_type);
         $file_extension = pathinfo($file->getFileUri(), PATHINFO_EXTENSION);
         $attachments[] = [
           'url' => $url,
@@ -34,7 +34,7 @@ function civic_preprocess_paragraph__civic_attachment(&$variables) {
             '@size' => strtoupper($file_size),
           ]),
           'icon' => $icon,
-          'last_updated' => \Drupal::service('date.formatter')->format($attachment->getChangedTime(), 'civic_short_date'),
+          'last_updated' => \Drupal::service('date.formatter')->format($attachment->getChangedTime(), 'civictheme_short_date'),
         ];
       }
     }
@@ -52,7 +52,7 @@ function civic_preprocess_paragraph__civic_attachment(&$variables) {
  * @return string
  *   Return Symbol.
  */
-function _civic_attachment_file_icon_map($mime_type) {
+function _civictheme_attachment_file_icon_map($mime_type) {
   switch ($mime_type) {
     // Word document types.
     case 'application/msword':

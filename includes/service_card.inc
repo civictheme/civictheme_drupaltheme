@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Service card paragraph component.
+ * CivicTheme Service card paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_service_card(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_service_card(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 

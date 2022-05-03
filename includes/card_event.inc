@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic event card paragraph component.
+ * CivicTheme event card paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_card_event(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_card_event(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
@@ -25,7 +25,7 @@ function civic_preprocess_paragraph__civic_card_event(&$variables) {
 
   // Event date.
   if ($paragraph->hasField('field_c_p_date') && !$paragraph->get('field_c_p_date')->isEmpty()) {
-    $variables['date'] = \Drupal::service('date.formatter')->format(strtotime($paragraph->get('field_c_p_date')->value), 'civic_short_date');
+    $variables['date'] = \Drupal::service('date.formatter')->format(strtotime($paragraph->get('field_c_p_date')->value), 'civictheme_short_date');
   }
 
   // Event topics.

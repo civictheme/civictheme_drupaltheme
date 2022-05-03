@@ -11,28 +11,28 @@ use Drupal\node\NodeInterface;
 /**
  * Defines Small banner style.
  */
-define('CIVIC_BANNER_TYPE_DEFAULT', 'default');
+define('CIVICTHEME_BANNER_TYPE_DEFAULT', 'default');
 
 /**
  * Defines Large banner style.
  */
-define('CIVIC_BANNER_TYPE_LARGE', 'large');
+define('CIVICTHEME_BANNER_TYPE_LARGE', 'large');
 
 /**
  * Defines Large banner style.
  */
-define('CIVIC_BANNER_DEFAULT_THEME', 'light');
+define('CIVICTHEME_BANNER_DEFAULT_THEME', 'light');
 
 /**
  * Pre-process for Programmatic Block - Banner block.
  */
-function _civic_preprocess_block__civic_banner(&$variables) {
+function _civictheme_preprocess_block__civictheme_banner(&$variables) {
   if ($variables['base_plugin_id'] != 'block_content') {
     return;
   }
 
   $entity = $variables['elements']['content']['#block_content'];
-  if ($entity->bundle() != 'civic_banner' || ($entity->hasField('field_c_b_type') && $entity->field_c_b_type->isEmpty())) {
+  if ($entity->bundle() != 'civictheme_banner' || ($entity->hasField('field_c_b_type') && $entity->field_c_b_type->isEmpty())) {
     return;
   }
 
@@ -47,22 +47,22 @@ function _civic_preprocess_block__civic_banner(&$variables) {
   $variables['#cache']['contexts'][] = 'url.path';
   $variables['#cache']['contexts'][] = 'url.query_args';
 
-  $variables['type'] = CIVIC_BANNER_TYPE_DEFAULT;
+  $variables['type'] = CIVICTHEME_BANNER_TYPE_DEFAULT;
 
-  $variables['theme'] = CIVIC_BANNER_DEFAULT_THEME;
+  $variables['theme'] = CIVICTHEME_BANNER_DEFAULT_THEME;
   if ($entity->hasField('field_c_b_theme') && !$entity->get('field_c_b_theme')->isEmpty()) {
     $variables['theme'] = strtolower($entity->get('field_c_b_theme')->getString());
   }
 
   if ($entity->hasField('field_c_b_background_image') && !$entity->get('field_c_b_background_image')->isEmpty()) {
-    $variables['background_image'] = civic_media_get_url_from_field($entity, 'field_c_b_background_image');
+    $variables['background_image'] = civictheme_media_get_url_from_field($entity, 'field_c_b_background_image');
   }
 
-  _civic_preprocess_civic_banner_title($variables);
-  _civic_preprocess_civic_banner_breadcrumb($variables);
-  _civic_preprocess_civic_banner_node($variables);
+  _civictheme_preprocess_civictheme_banner_title($variables);
+  _civictheme_preprocess_civictheme_banner_breadcrumb($variables);
+  _civictheme_preprocess_civictheme_banner_node($variables);
 
-  if ($variables['type'] == CIVIC_BANNER_TYPE_LARGE) {
+  if ($variables['type'] == CIVICTHEME_BANNER_TYPE_LARGE) {
     $variables['is_decorative'] = TRUE;
   }
 
@@ -76,7 +76,7 @@ function _civic_preprocess_block__civic_banner(&$variables) {
 /**
  * Pre-process banner title.
  */
-function _civic_preprocess_civic_banner_title(&$variables) {
+function _civictheme_preprocess_civictheme_banner_title(&$variables) {
   // Banner title.
   $request = \Drupal::request();
   $route_match = \Drupal::routeMatch();
@@ -87,7 +87,7 @@ function _civic_preprocess_civic_banner_title(&$variables) {
 /**
  * Pre-process banner breadcrumb.
  */
-function _civic_preprocess_civic_banner_breadcrumb(&$variables) {
+function _civictheme_preprocess_civictheme_banner_breadcrumb(&$variables) {
   $is_front = \Drupal::service('path.matcher')->isFrontPage();
 
   // Disable breadcrumb on homepage.
@@ -101,8 +101,8 @@ function _civic_preprocess_civic_banner_breadcrumb(&$variables) {
   if ($breadcrumb) {
     $variables['breadcrumb'] = $breadcrumb->toRenderable();
     if (isset($variables['theme'])) {
-      // Changing to Civic theme to pass other variables to template.
-      $variables['breadcrumb']['#theme'] = 'civic_breadcrumb';
+      // Changing to CivicTheme theme to pass other variables to template.
+      $variables['breadcrumb']['#theme'] = 'civictheme_breadcrumb';
       $variables['breadcrumb']['#display_theme'] = $variables['theme'];
     }
   }
@@ -111,7 +111,7 @@ function _civic_preprocess_civic_banner_breadcrumb(&$variables) {
 /**
  * Pre-process banner for all nodes.
  */
-function _civic_preprocess_civic_banner_node(&$variables) {
+function _civictheme_preprocess_civictheme_banner_node(&$variables) {
   /** @var \Drupal\node\Entity\Node $node */
   $node = \Drupal::routeMatch()->getParameter('node');
   $node_revision = \Drupal::routeMatch()->getParameter('node_revision');
@@ -137,19 +137,19 @@ function _civic_preprocess_civic_banner_node(&$variables) {
 
   if (!$is_front) {
     $variables['content'][] = [
-      '#theme' => 'civic_basic_content',
-      '#content' => 'Last updated: ' . \Drupal::service('date.formatter')->format($node->getChangedTime(), 'civic_short_date'),
+      '#theme' => 'civictheme_basic_content',
+      '#content' => 'Last updated: ' . \Drupal::service('date.formatter')->format($node->getChangedTime(), 'civictheme_short_date'),
     ];
   }
 
   // Banner background.
   if ($node->hasField('field_c_n_banner_background') && !$node->get('field_c_n_banner_background')->isEmpty()) {
-    $variables['background_image'] = civic_media_get_url_from_field($node, 'field_c_n_banner_background');
+    $variables['background_image'] = civictheme_media_get_url_from_field($node, 'field_c_n_banner_background');
   }
 
   // Banner featured image.
   if ($node->hasField('field_c_n_banner_featured_image') && !$node->get('field_c_n_banner_featured_image')->isEmpty()) {
-    $variables['featured_image']['src'] = civic_media_get_url_from_field($node, 'field_c_n_banner_featured_image');
+    $variables['featured_image']['src'] = civictheme_media_get_url_from_field($node, 'field_c_n_banner_featured_image');
     // @todo Iplement correct getter for alt attribute.
     $variables['featured_image']['alt'] = t('Banner featured image');
   }

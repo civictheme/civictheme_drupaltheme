@@ -10,37 +10,37 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function civic_theme_suggestions_paragraph_alter(array &$suggestions, array $variables) {
+function civictheme_theme_suggestions_paragraph_alter(array &$suggestions, array $variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['elements']['#paragraph'];
   $type = $paragraph->getType();
 
   // Add a generic card theme suggestion for reference cards since the component
   // is being handled via node preprocessing functions.
-  if (in_array($type, _civic_get_card_types()) && $paragraph->hasField('field_c_p_reference')) {
-    $suggestions[] = 'paragraph__civic_reference_card';
+  if (in_array($type, _civictheme_get_card_types()) && $paragraph->hasField('field_c_p_reference')) {
+    $suggestions[] = 'paragraph__civictheme_reference_card';
   }
 }
 
 /**
  * Generic setter of global variables for paragraphs as card renders.
  */
-function _civic_preprocess_paragraph__civic_card(&$variables) {
+function _civictheme_preprocess_paragraph__civictheme_card(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $bundle = $paragraph->getType();
-  if (!in_array($bundle, _civic_get_card_types())) {
+  if (!in_array($bundle, _civictheme_get_card_types())) {
     return;
   }
   // Cards that are generated via reference are handled separately.
   if ($paragraph->hasField('field_c_p_reference')) {
-    _civic_preprocess_paragraph__reference_card($variables);
+    _civictheme_preprocess_paragraph__reference_card($variables);
   }
   else {
     // @todo documentation for the field api ie they must have certain fields in
     // card fielded paragraph types.
-    _civic_preprocess_paragraph__card__icon($variables);
-    _civic_preprocess_paragraph__card__image($variables);
+    _civictheme_preprocess_paragraph__card__icon($variables);
+    _civictheme_preprocess_paragraph__card__image($variables);
   }
 
 }
@@ -48,21 +48,21 @@ function _civic_preprocess_paragraph__civic_card(&$variables) {
 /**
  * Global paragraph preprocessor calls.
  */
-function _civic_preprocess_paragraph(&$variables) {
+function _civictheme_preprocess_paragraph(&$variables) {
   // Global paragraph fields.
-  _civic_preprocess_paragraph__field__theme($variables);
-  _civic_preprocess_paragraph__field__title($variables);
-  _civic_preprocess_paragraph__field__summary($variables);
-  _civic_preprocess_paragraph__field__space($variables);
-  _civic_preprocess_paragraph__field__background($variables);
-  _civic_preprocess_paragraph__civic_card($variables);
+  _civictheme_preprocess_paragraph__field__theme($variables);
+  _civictheme_preprocess_paragraph__field__title($variables);
+  _civictheme_preprocess_paragraph__field__summary($variables);
+  _civictheme_preprocess_paragraph__field__space($variables);
+  _civictheme_preprocess_paragraph__field__background($variables);
+  _civictheme_preprocess_paragraph__civictheme_card($variables);
 
 }
 
 /**
- * Pre-process summary for Civic paragraphs.
+ * Pre-process summary for CivicTheme paragraphs.
  */
-function _civic_preprocess_paragraph__field__summary(&$variables) {
+function _civictheme_preprocess_paragraph__field__summary(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_summary') && !$paragraph->get('field_c_p_summary')->isEmpty()) {
@@ -71,9 +71,9 @@ function _civic_preprocess_paragraph__field__summary(&$variables) {
 }
 
 /**
- * Pre-process title for Civic paragraphs.
+ * Pre-process title for CivicTheme paragraphs.
  */
-function _civic_preprocess_paragraph__field__title(&$variables) {
+function _civictheme_preprocess_paragraph__field__title(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_title') && !$paragraph->get('field_c_p_title')->isEmpty()) {
@@ -82,9 +82,9 @@ function _civic_preprocess_paragraph__field__title(&$variables) {
 }
 
 /**
- * Pre-process "With space" for Civic paragraphs.
+ * Pre-process "With space" for CivicTheme paragraphs.
  */
-function _civic_preprocess_paragraph__field__space(&$variables) {
+function _civictheme_preprocess_paragraph__field__space(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_space') && !$paragraph->get('field_c_p_space')->isEmpty()) {
@@ -93,9 +93,9 @@ function _civic_preprocess_paragraph__field__space(&$variables) {
 }
 
 /**
- * Pre-process "with background" for Civic paragraphs.
+ * Pre-process "with background" for CivicTheme paragraphs.
  */
-function _civic_preprocess_paragraph__field__background(&$variables) {
+function _civictheme_preprocess_paragraph__field__background(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_background')
@@ -111,27 +111,27 @@ function _civic_preprocess_paragraph__field__background(&$variables) {
 }
 
 /**
- * Pre-process Theme fields for Civic paragraphs.
+ * Pre-process Theme fields for CivicTheme paragraphs.
  */
-function _civic_preprocess_paragraph__field__theme(&$variables) {
+function _civictheme_preprocess_paragraph__field__theme(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
-  if ($theme = _civic_paragraph_get_theme($paragraph)) {
+  if ($theme = _civictheme_paragraph_get_theme($paragraph)) {
     $variables['theme'] = $theme;
   }
 }
 
 /**
- * Pre-process icon for Civic cards.
+ * Pre-process icon for CivicTheme cards.
  */
-function _civic_preprocess_paragraph__card__icon(&$variables) {
+function _civictheme_preprocess_paragraph__card__icon(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_icon') && !$paragraph->get('field_c_p_icon')->isEmpty()) {
     $target = $paragraph->get('field_c_p_icon')->first()->get('entity')->getTarget();
     if ($target) {
       $media = $target->getValue();
-      if ($image = civic_media_image_process_variables($media)) {
+      if ($image = civictheme_media_image_process_variables($media)) {
         $variables['image'] = $image;
       }
     }
@@ -139,48 +139,48 @@ function _civic_preprocess_paragraph__card__icon(&$variables) {
 }
 
 /**
- * Pre-process Icon for Civic Paragraphs.
+ * Pre-process Icon for CivicTheme Paragraphs.
  */
-function _civic_preprocess_paragraph__card__image(&$variables) {
+function _civictheme_preprocess_paragraph__card__image(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   if ($paragraph->hasField('field_c_p_image') && !$paragraph->get('field_c_p_image')->isEmpty()) {
     $target = $paragraph->get('field_c_p_image')->first()->get('entity')->getTarget();
     if ($target) {
       $media = $target->getValue();
-      $variables['image'] = civic_media_image_process_variables($media);
+      $variables['image'] = civictheme_media_image_process_variables($media);
     }
   }
 }
 
 /**
- * Gets Civic card types.
+ * Gets CivicTheme card types.
  */
-function _civic_get_card_types() {
+function _civictheme_get_card_types() {
   // @todo extend to allow for child theme - implement as theme setting.
   return [
-    'civic_card_container',
-    'civic_card_task',
-    'civic_card_event_reference',
-    'civic_card_event',
-    'civic_card_navigation_reference',
-    'civic_card_navigation',
-    'civic_card_promo',
-    'civic_card_reference_promo',
-    'civic_card_subject_reference',
-    'civic_card_subject',
-    'civic_service_card',
-    'civic_publication_card',
+    'civictheme_card_container',
+    'civictheme_card_task',
+    'civictheme_card_event_ref',
+    'civictheme_card_event',
+    'civictheme_card_navigation_ref',
+    'civictheme_card_navigation',
+    'civictheme_card_promo',
+    'civictheme_card_promo_ref',
+    'civictheme_card_subject_ref',
+    'civictheme_card_subject',
+    'civictheme_service_card',
+    'civictheme_publication_card',
   ];
 }
 
 /**
  * Preprocessing reference cards paragraphs.
  */
-function _civic_preprocess_paragraph__reference_card(&$variables) {
+function _civictheme_preprocess_paragraph__reference_card(&$variables) {
   // Card reference paragraph types are handled on a generic template.
   // Card type are handled at node level via view modes.
-  // @see civic_theme_suggestions_paragraph_alter()
+  // @see civictheme_theme_suggestions_paragraph_alter()
   $variables['reference_card'] = $variables['content']['field_c_p_reference'];
 }
 
@@ -190,7 +190,7 @@ function _civic_preprocess_paragraph__reference_card(&$variables) {
  * @param \Drupal\paragraphs\Entity\Paragraph $paragraph
  *   Paragraph Entity.
  */
-function _civic_paragraph_get_theme(Paragraph $paragraph) {
+function _civictheme_paragraph_get_theme(Paragraph $paragraph) {
   if ($paragraph->hasField('field_c_p_theme') && !$paragraph->get('field_c_p_theme')->isEmpty()) {
     return $paragraph->get('field_c_p_theme')->getString();
   }

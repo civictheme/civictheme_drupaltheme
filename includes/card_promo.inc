@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic card promo paragraph component.
+ * CivicTheme card promo paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_card_promo(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_card_promo(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $link = ($paragraph->hasField('field_c_p_link') && !$paragraph->get('field_c_p_link')->isEmpty()) ? $paragraph->get('field_c_p_link')->first()->getValue() : [];
@@ -23,7 +23,7 @@ function civic_preprocess_paragraph__civic_card_promo(&$variables) {
 
   // Promo date.
   if ($paragraph->hasField('field_c_p_date') && !$paragraph->get('field_c_p_date')->isEmpty()) {
-    $variables['date'] = \Drupal::service('date.formatter')->format(strtotime($paragraph->get('field_c_p_date')->value), 'civic_short_date');
+    $variables['date'] = \Drupal::service('date.formatter')->format(strtotime($paragraph->get('field_c_p_date')->value), 'civictheme_short_date');
   }
 
   // Topics.

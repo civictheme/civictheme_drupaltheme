@@ -1,10 +1,10 @@
 {
-    "name": "salsadigitalauorg/civic",
-    "description": "Drupal 9 theme",
+    "name": "salsadigitalauorg/civictheme",
+    "description": "CivicTheme is a Drupal 9 component-based theme.",
     "type": "drupal-theme",
-    "homepage": "https://github.com/salsadigitalauorg/civic-theme",
+    "homepage": "https://github.com/salsadigitalauorg/civictheme-drupal",
     "support": {
-        "issues": "https://github.com/salsadigitalauorg/civic-theme/issues"
+        "issues": "https://github.com/salsadigitalauorg/civictheme-source/issues"
     },
     "license": "proprietary"
 }

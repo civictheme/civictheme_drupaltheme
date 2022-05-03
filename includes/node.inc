@@ -10,7 +10,7 @@ use Drupal\Core\Template\Attribute;
 /**
  * Generic pre-process for all view mode of nodes.
  */
-function _civic_preprocess_node(&$variables) {
+function _civictheme_preprocess_node(&$variables) {
   $node = $variables['node'];
 
   if (!$node) {
@@ -35,7 +35,7 @@ function _civic_preprocess_node(&$variables) {
     $toc_attributes['data-table-of-contents-theme'] = 'light';
     $toc_attributes['data-table-of-contents-anchor-selector'] = 'h2';
     $toc_attributes['data-table-of-contents-title'] = t('On this page');
-    $toc_attributes['data-table-of-contents-anchor-scope-selector'] = '.civic-content__main';
+    $toc_attributes['data-table-of-contents-anchor-scope-selector'] = '.civictheme-content__main';
     $toc_attributes = new Attribute($toc_attributes);
 
     array_unshift($variables['content'], [
@@ -47,35 +47,35 @@ function _civic_preprocess_node(&$variables) {
 /**
  * Pre-process Full view mode of nodes.
  */
-function _civic_preprocess_node__full(&$variables) {
+function _civictheme_preprocess_node__full(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   $type = $node->getType();
-  $type_callback = '_civic_preprocess_node__' . $type . '__full';
+  $type_callback = '_civictheme_preprocess_node__' . $type . '__full';
   if (function_exists($type_callback)) {
     $type_callback($variables);
   }
-  civic_attributes_to_modifier_class($variables);
+  civictheme_attributes_to_modifier_class($variables);
 }
 
 /**
  * Default view mode fallback preprocessor for nodes.
  */
-function _civic_preprocess_node__default(&$variables) {
+function _civictheme_preprocess_node__default(&$variables) {
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
   $type = $node->getType();
-  $type_callback = '_civic_preprocess_node__' . $type . '__full';
+  $type_callback = '_civictheme_preprocess_node__' . $type . '__full';
   if (function_exists($type_callback)) {
     $type_callback($variables);
   }
-  civic_attributes_to_modifier_class($variables);
+  civictheme_attributes_to_modifier_class($variables);
 }
 
 /**
- * Pre-process Civic alert nodes.
+ * Pre-process CivicTheme alert nodes.
  */
-function _civic_preprocess_node__civic_alert__full(&$variables) {
+function _civictheme_preprocess_node__civictheme_alert__full(&$variables) {
   $node = $variables['node'];
   $variables['id'] = $node->id();
   $variables['title'] = $node->label();
@@ -86,9 +86,9 @@ function _civic_preprocess_node__civic_alert__full(&$variables) {
 /**
  * Generic page pre-process for all view mode of nodes.
  */
-function _civic_preprocess_page__node(&$variables) {
+function _civictheme_preprocess_page__node(&$variables) {
   /** @var \Drupal\node\Entity\Node $node */
-  $node = civic_load_node_or_revision($variables);
+  $node = civictheme_load_node_or_revision($variables);
 
   if (!$node) {
     return;

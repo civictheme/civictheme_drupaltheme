@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic publication card paragraph component.
+ * CivicTheme publication card paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -12,7 +12,7 @@ use Drupal\file\Entity\File;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_publication_card(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_publication_card(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $link = ($paragraph->hasField('field_c_p_link') && !$paragraph->get('field_c_p_link')->isEmpty()) ? $paragraph->get('field_c_p_link')->first()->getValue() : [];

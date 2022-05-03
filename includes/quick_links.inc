@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic quick links paragraph component.
+ * CivicTheme quick links paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -11,7 +11,7 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_quick_links(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_quick_links(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 

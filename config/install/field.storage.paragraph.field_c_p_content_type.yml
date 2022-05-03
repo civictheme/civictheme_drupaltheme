@@ -11,10 +11,10 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: civic_page
+      value: civictheme_page
       label: Page
     -
-      value: civic_event
+      value: civictheme_event
       label: Event
   allowed_values_function: ''
 module: options

@@ -8,7 +8,7 @@
 /**
  * Generic image pre-processing.
  */
-function _civic_preprocess_image(&$variables) {
+function _civictheme_preprocess_image(&$variables) {
   if (isset($variables['attributes']['src'])) {
     $variables['src'] = $variables['attributes']['src'];
   }

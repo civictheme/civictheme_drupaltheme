@@ -8,7 +8,7 @@
 /**
  * Page pre-process to support showing of alerts.
  */
-function _civic_preprocess_page__civic_alert(&$variables) {
-  $variables['attributes']['data-component-name'] = 'civic-alerts';
-  $variables['attributes']['data-alert-endpoint'] = '/api/civic-alerts?_format=json';
+function _civictheme_preprocess_page__civictheme_alert(&$variables) {
+  $variables['attributes']['data-component-name'] = 'civictheme-alerts';
+  $variables['attributes']['data-alert-endpoint'] = '/api/civictheme-alerts?_format=json';
 }

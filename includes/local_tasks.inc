@@ -8,9 +8,9 @@
 /**
  * Pre-process for local tasks.
  */
-function _civic_preprocess_menu_local_tasks(&$variables) {
+function _civictheme_preprocess_menu_local_tasks(&$variables) {
   $local_task_types = ['primary', 'secondary'];
-  $theme = theme_get_setting('civic_header_theme') ?? 'light';
+  $theme = theme_get_setting('civictheme_header_theme') ?? 'light';
 
   foreach ($local_task_types as $local_task_type) {
     $variables['links'][$local_task_type] = [];

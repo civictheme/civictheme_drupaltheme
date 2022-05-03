@@ -11,10 +11,10 @@ type: list_string
 settings:
   allowed_values:
     -
-      value: civic_card_promo
+      value: civictheme_card_promo
       label: Promo
     -
-      value: civic_card_navigation
+      value: civictheme_card_navigation
       label: Navigation
   allowed_values_function: ''
 module: options

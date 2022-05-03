@@ -8,7 +8,7 @@
 /**
  * Implements template_preprocess_pager().
  */
-function civic_preprocess_pager(&$variables) {
+function civictheme_preprocess_pager(&$variables) {
   /** @var \Drupal\Core\Pager\PagerManagerInterface $pager_manager */
   $pager_manager = \Drupal::service('pager.manager');
 

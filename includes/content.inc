@@ -2,24 +2,24 @@
 
 /**
  * @file
- * Civic Content paragraph component.
+ * CivicTheme Content paragraph component.
  */
 
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_content(&$variables) {
-  _civic_preprocess_paragraph($variables);
+function civictheme_preprocess_paragraph__civictheme_content(&$variables) {
+  _civictheme_preprocess_paragraph($variables);
   $content = '';
   if (!empty($variables['content']['field_c_p_content'])) {
     $content = \Drupal::service('renderer')->render($variables['content']['field_c_p_content']);
   }
   // Replace theme variable with component level component theme.
-  // Note: All style dropdowns and components need to use civic's default theme
+  // Note: All style dropdowns and components need to use civictheme's default
   // theme light in order to be updated with the correct component set theme.
   // Example: Button style dropdown classes are:
-  // .civic-button.civic-theme-light.civic-button--primary.civic-button--regular
+  // .civictheme-button.civictheme-theme-light.civictheme-button--primary.civictheme-button--regular
   // if the component is dark we str_replace the theme class and replace.
-  $content = str_replace('civic-theme-light', 'civic-theme-' . $variables['theme'], $content);
+  $content = str_replace('civictheme-theme-light', 'civictheme-theme-' . $variables['theme'], $content);
   $variables['content'] = $content;
 }

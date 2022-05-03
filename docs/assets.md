@@ -1,7 +1,7 @@
 # Assets
 
-Drupal-specific JS/CSS libraries can be provided for within the `civic/assets`
-directory. Look at `civic/assets` for examples.
+Drupal-specific JS/CSS libraries can be provided for within the `civictheme/assets`
+directory. Look at `civictheme/assets` for examples.
 
 ## Installing the required JS libraries
 
@@ -21,5 +21,5 @@ directory. Look at `civic/assets` for examples.
 
 ## Icons
 
-See [Icons](../civic-library/docs/icons.md) for an introduction to creating your
+See [Icons](../civictheme-library/docs/icons.md) for an introduction to creating your
 theme's icon library.

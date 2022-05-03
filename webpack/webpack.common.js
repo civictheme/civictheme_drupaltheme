@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: (function (pattern) {
     // Splitting entries into two chunks:
-    // main: all styles used in components and drupal theme -> output: civic.css
+    // main: all styles used in components and drupal theme -> output: civictheme.css
     // ckeditor: nested styles used in ckeditor -> output: ckeditor.css
     const entries = {
       main: [],
@@ -33,7 +33,7 @@ module.exports = {
       cacheGroups: {
         styles: {
           test: 'css/mini-extract',
-          name: 'civic',
+          name: 'civictheme',
           chunks: (chunk) => (chunk.name === 'main'),
         },
         ckeditor: {
@@ -45,12 +45,12 @@ module.exports = {
     },
   },
   output: {
-    filename: (pathData) => (pathData.chunk.name === 'main' ? 'civic.js' : 'civic-[name].js'),
+    filename: (pathData) => (pathData.chunk.name === 'main' ? 'civictheme.js' : 'civictheme-[name].js'),
     path: path.resolve(__dirname, '../dist'),
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: ({ chunk }) => (chunk.name === 'main' ? 'civic.css' : `${chunk.name}.css`),
+      filename: ({ chunk }) => (chunk.name === 'main' ? 'civictheme.css' : `${chunk.name}.css`),
     }),
     new CleanWebpackPlugin(),
   ],
@@ -80,7 +80,7 @@ module.exports = {
             options: {
               // Inject path to assets so that it does not have to be provided
               // in variables.base.scss
-              additionalData: "$civic-assets-directory: '/themes/contrib/civic/dist/assets/';",
+              additionalData: "$civictheme-assets-directory: '/themes/contrib/civictheme/dist/assets/';",
               sourceMap: true,
               sassOptions: {
                 importer: magicImporter(),

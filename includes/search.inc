@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic Accordion paragraph component.
+ * CivicTheme Accordion paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -10,7 +10,7 @@ use Drupal\Component\Utility\UrlHelper;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_search(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_search(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   $variables['button_text'] = $paragraph->get('field_c_p_button_text')->getString();

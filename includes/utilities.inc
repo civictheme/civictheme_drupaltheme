@@ -16,7 +16,7 @@ use Drupal\node\NodeInterface;
 /**
  * Load node or the node revision if the route is a node revision.
  */
-function civic_load_node_or_revision($variables) {
+function civictheme_load_node_or_revision($variables) {
   $node = $variables['node'] ?? NULL;
 
   if (is_numeric($node)) {
@@ -47,7 +47,7 @@ function civic_load_node_or_revision($variables) {
  * @return array
  *   Image array or false if not available.
  */
-function civic_media_image_process_variables(MediaInterface $media, $image_style = NULL) {
+function civictheme_media_image_process_variables(MediaInterface $media, $image_style = NULL) {
   if ($media instanceof Media) {
     $fid = $media->getSource()->getSourceFieldValue($media);
     $config = $media->getSource()->getConfiguration();
@@ -83,7 +83,7 @@ function civic_media_image_process_variables(MediaInterface $media, $image_style
  * @return string
  *   Image URL or FALSE if not available.
  */
-function civic_media_get_url_from_field(EntityInterface $entity, string $field_name) {
+function civictheme_media_get_url_from_field(EntityInterface $entity, string $field_name) {
   if ($entity->hasField($field_name) && !$entity->get($field_name)->isEmpty()) {
     /** @var \Drupal\media\Entity\Media $media */
     $media = $entity->get($field_name)->first()->entity;
@@ -110,7 +110,7 @@ function civic_media_get_url_from_field(EntityInterface $entity, string $field_n
  * @return string
  *   Loaded SVG or FALSE if unable to load SVG.
  */
-function civic_embed_svg($url, array $css_classes = []) {
+function civictheme_embed_svg($url, array $css_classes = []) {
   $svg_path = DRUPAL_ROOT . (strpos($url, 'http') === 0 ? parse_url(str_replace('.png', '.svg', $url), PHP_URL_PATH) : str_replace('.png', '.svg', $url));
   if (!file_exists($svg_path)) {
     return FALSE;
@@ -134,7 +134,7 @@ function civic_embed_svg($url, array $css_classes = []) {
  * @return array
  *   Array of attributes.
  */
-function civic_parse_attributes($string) {
+function civictheme_parse_attributes($string) {
   $attributes = [];
 
   if (preg_match_all('/\s*(?:([a-z0-9-]+)\s*=\s*"([^"]*)")|(?:\s+([a-z0-9-]+)(?=\s*|>|\s+[a-z0-9]+))/i', $string, $matches)) {
@@ -154,10 +154,10 @@ function civic_parse_attributes($string) {
 /**
  * Parse attribute classes into a string for modifier_class property.
  */
-function civic_attributes_to_modifier_class(&$variables) {
+function civictheme_attributes_to_modifier_class(&$variables) {
   if (isset($variables['attributes'])) {
     $attributes = new Attribute($variables['attributes']);
-    if ($classes = civic_get_css_class_attributes($attributes)) {
+    if ($classes = civictheme_get_css_class_attributes($attributes)) {
       $variables['modifier_class'] = $classes;
     }
   }
@@ -172,7 +172,7 @@ function civic_attributes_to_modifier_class(&$variables) {
  * @return string
  *   Classes as a string.
  */
-function civic_get_css_class_attributes(Attribute $attributes) {
+function civictheme_get_css_class_attributes(Attribute $attributes) {
   if ($attributes->hasAttribute('class')) {
     return implode(' ', $attributes->getClass()->value());
   }
@@ -185,6 +185,6 @@ function civic_get_css_class_attributes(Attribute $attributes) {
  * @return mixed
  *   Formatted date.
  */
-function civic_format_short_date($date) {
-  return \Drupal::service('date.formatter')->format(strtotime($date), 'civic_short_date');
+function civictheme_format_short_date($date) {
+  return \Drupal::service('date.formatter')->format(strtotime($date), 'civictheme_short_date');
 }

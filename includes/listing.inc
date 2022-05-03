@@ -15,22 +15,22 @@ use Drupal\views\Views;
 /**
  * Defines limited limit type.
  */
-define('CIVIC_LISTINGS_LIMIT_TYPE_LIMITED', 'limited');
+define('CIVICTHEME_LISTINGS_LIMIT_TYPE_LIMITED', 'limited');
 
 /**
  * Defines unlimited limit type.
  */
-define('CIVIC_LISTINGS_LIMIT_TYPE_UNLIMITED', 'unlimited');
+define('CIVICTHEME_LISTINGS_LIMIT_TYPE_UNLIMITED', 'unlimited');
 
 /**
  * Defines fallback limit of Full listings items if pager is disabled.
  */
-define('CIVIC_LISTINGS_FULL_FALLBACK_LIMIT', 100);
+define('CIVICTHEME_LISTINGS_FULL_FALLBACK_LIMIT', 100);
 
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_listing(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_listing(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
   // Get the parent bundle.
@@ -38,9 +38,9 @@ function civic_preprocess_paragraph__civic_listing(&$variables) {
   $variables['limit'] = $paragraph->field_c_p_listing_limit->value;
   $variables['uniqId'] = Html::getUniqueId('listing-' . $paragraph->id());
 
-  $variables['listing'] = _civic_listing_element($paragraph);
+  $variables['listing'] = _civictheme_listing_element($paragraph);
 
-  _civic_render_listing_paragraph_add_read_more($paragraph, $variables);
+  _civictheme_render_listing_paragraph_add_read_more($paragraph, $variables);
 }
 
 /**
@@ -55,20 +55,20 @@ function civic_preprocess_paragraph__civic_listing(&$variables) {
  * @return array
  *   The render array for view and exposed form.
  */
-function _civic_listing_element(Paragraph $paragraph) {
-  $view_name = 'civic_listing';
+function _civictheme_listing_element(Paragraph $paragraph) {
+  $view_name = 'civictheme_listing';
 
   // Call modules/theme that implement the hook, and let them change the view.
-  \Drupal::moduleHandler()->alter('civic_listing_view_name', $view_name);
-  \Drupal::service('theme.manager')->alter('civic_listing_view_name', $view_name);
+  \Drupal::moduleHandler()->alter('civictheme_listing_view_name', $view_name);
+  \Drupal::service('theme.manager')->alter('civictheme_listing_view_name', $view_name);
 
-  $view_display = 'civic_listing_block';
+  $view_display = 'civictheme_listing_block';
   $show_filters = (int) $paragraph->field_c_p_show_filters->value;
 
   $view = Views::getView($view_name);
   if ($view) {
     $view->setDisplay($view_display);
-    _civic_listing_alter_view($paragraph, $view);
+    _civictheme_listing_alter_view($paragraph, $view);
   }
 
   if ($view) {
@@ -93,13 +93,13 @@ function _civic_listing_element(Paragraph $paragraph) {
 }
 
 /**
- * Loads and alters view for civic listing.
+ * Loads and alters view for civictheme listing.
  */
-function _civic_listing_alter_view($paragraph, &$view) {
-  $fallback_limit = CIVIC_LISTINGS_FULL_FALLBACK_LIMIT;
+function _civictheme_listing_alter_view($paragraph, &$view) {
+  $fallback_limit = CIVICTHEME_LISTINGS_FULL_FALLBACK_LIMIT;
   $title = $paragraph->field_c_p_title->value;
   $content_type = $paragraph->field_c_p_content_type->value;
-  $topics = _civic_get_entity_field_values($paragraph, 'field_c_p_topics', 'target_id');
+  $topics = _civictheme_get_entity_field_values($paragraph, 'field_c_p_topics', 'target_id');
   $view_mode = $paragraph->field_c_p_view_as->value;
   $limit_type = $paragraph->field_c_p_limit_type->value;
   $limit = (int) $paragraph->field_c_p_listing_limit->value;
@@ -135,7 +135,7 @@ function _civic_listing_alter_view($paragraph, &$view) {
     // Pager.
     $pager = NULL;
     // Do not show pager, but show exact number of items.
-    if ($limit_type == CIVIC_LISTINGS_LIMIT_TYPE_LIMITED) {
+    if ($limit_type == CIVICTHEME_LISTINGS_LIMIT_TYPE_LIMITED) {
       // Prevent endless lists by using a fallback limit if a limit is 0.
       $limit = $limit > 0 ? $limit : $fallback_limit;
       // Changing pager type to 'some' and setting 'items_per_page'.
@@ -145,7 +145,7 @@ function _civic_listing_alter_view($paragraph, &$view) {
       $view->display_handler->setOption('pager', $pager);
     }
     else {
-      if ($show_pager && $limit_type == CIVIC_LISTINGS_LIMIT_TYPE_UNLIMITED) {
+      if ($show_pager && $limit_type == CIVICTHEME_LISTINGS_LIMIT_TYPE_UNLIMITED) {
         if ($items_per_page == 0) {
           // Show pager and default number of items.
           // This is default view display state, so no change is required.
@@ -184,7 +184,7 @@ function _civic_listing_alter_view($paragraph, &$view) {
  * @param array $variables
  *   Render array variables.
  */
-function _civic_render_listing_paragraph_add_read_more(Paragraph $paragraph, array &$variables) {
+function _civictheme_render_listing_paragraph_add_read_more(Paragraph $paragraph, array &$variables) {
   // Read More link.
   if ($read_more_uri = $paragraph->field_c_p_read_more->uri) {
     $read_more_title = $paragraph->field_c_p_read_more->title;
@@ -209,7 +209,7 @@ function _civic_render_listing_paragraph_add_read_more(Paragraph $paragraph, arr
  *   Array of field values. If field does not exist or incorrect $value_key
  *   provided, empty array will be returned.
  */
-function _civic_get_entity_field_values(EntityInterface $entity, $field_name, $value_key = 'value') {
+function _civictheme_get_entity_field_values(EntityInterface $entity, $field_name, $value_key = 'value') {
   $values = [];
 
   if ($entity->hasField($field_name)) {

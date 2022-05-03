@@ -2,13 +2,13 @@
 
 /**
  * @file
- * Civic Card container paragraph component.
+ * CivicTheme Card container paragraph component.
  */
 
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_card_container(&$variables) {
+function civictheme_preprocess_paragraph__civictheme_card_container(&$variables) {
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 

@@ -49,7 +49,7 @@ module.exports = {
     custom.module.rules[1].use[0] = 'style-loader';
 
     // Override assets location for Storybook.
-    custom.module.rules[1].use[2].options.additionalData = "$civic-assets-directory: './assets/';";
+    custom.module.rules[1].use[2].options.additionalData = "$civictheme-assets-directory: './assets/';";
 
     return merge(config, custom);
   },

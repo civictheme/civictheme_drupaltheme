@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic mobile menu block theme alterations.
+ * CivicTheme mobile menu block theme alterations.
  */
 
 use Drupal\Core\Cache\Cache;
@@ -11,13 +11,13 @@ use Drupal\Core\Menu\MenuTreeParameters;
 /**
  * Pre-process for Mobile Navigation block.
  */
-function _civic_preprocess_block__civic_mobile_navigation(&$variables) {
+function _civictheme_preprocess_block__civictheme_mobile_navigation(&$variables) {
   if ($variables['base_plugin_id'] != 'block_content') {
     return;
   }
 
   $entity = $variables['elements']['content']['#block_content'];
-  if ($entity->bundle() != 'civic_mobile_navigation') {
+  if ($entity->bundle() != 'civictheme_mobile_navigation') {
     return;
   }
   $menu_fields = [

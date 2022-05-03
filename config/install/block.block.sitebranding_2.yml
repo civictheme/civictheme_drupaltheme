@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - civic
+    - civictheme
 id: sitebranding_2
-theme: civic
+theme: civictheme
 region: header_top_2
 weight: 0
 provider: null

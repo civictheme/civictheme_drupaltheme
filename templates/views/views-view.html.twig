@@ -1,7 +1,7 @@
 {#
 /**
  * @file
- * Civic theme implementation for main view template.
+ * CivicTheme theme implementation for main view template.
  *
  * Available variables:
  * - attributes: Remaining HTML attributes for the element.
@@ -36,7 +36,7 @@
 {% extends '@organisms/listing/listing.twig' %}
 
 {% block title %}
-  <div class="civic-listing__title">
+  <div class="civictheme-listing__title">
     {{ title_prefix }}
     {{ title }}
     {{ title_suffix }}
@@ -45,7 +45,7 @@
 
 {% block header %}
   {% if header %}
-    <header class="civic-listing__header" tabindex="0">
+    <header class="civictheme-listing__header" tabindex="0">
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
@@ -62,7 +62,7 @@
   {{ attachment_after }}
   {{ more }}
   {% if footer %}
-    <footer class="civic-listing__footer">
+    <footer class="civictheme-listing__footer">
       {{ footer }}
     </footer>
   {% endif %}

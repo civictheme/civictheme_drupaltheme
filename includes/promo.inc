@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Civic promo paragraph component.
+ * CivicTheme promo paragraph component.
  */
 
 use Drupal\Component\Utility\UrlHelper;
@@ -11,9 +11,9 @@ use Drupal\Core\Url;
 /**
  * Implements template_preprocess_paragraph().
  */
-function civic_preprocess_paragraph__civic_promo(&$variables) {
-  _civic_preprocess_paragraph__field__theme($variables);
-  _civic_preprocess_paragraph__field__title($variables);
+function civictheme_preprocess_paragraph__civictheme_promo(&$variables) {
+  _civictheme_preprocess_paragraph__field__theme($variables);
+  _civictheme_preprocess_paragraph__field__title($variables);
 
   /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
