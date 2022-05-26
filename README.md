@@ -1,5 +1,9 @@
 # CivicTheme Drupal theme
 
+----
+
+Version: `0.50.6`
+
 ## Introduction
 
 CivicTheme theme, the Drupal theme built using a standalone component library,
