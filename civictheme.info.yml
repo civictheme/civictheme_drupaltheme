@@ -71,5 +71,5 @@ components:
       - components/05-pages
 
 ckeditor_stylesheets:
-  - dist/ckeditor.css
+  - dist/civictheme.ckeditor.css
 
