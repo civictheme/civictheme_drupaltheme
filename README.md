@@ -2,7 +2,7 @@
 
 ----
 
-Version: `0.51.0`
+Version: `0.52.0`
 
 ## Introduction
 
@@ -42,8 +42,8 @@ Run the following command from within your sub-theme directory:
 
 ## Development documentation
 
-- [CivicTheme Component Library Documentation](./civictheme_library/docs/introduction.md)
-- [CivicTheme Drupal Theme Documentation](./docs/introduction.md)
+- [CivicTheme Component Library Documentation](./civictheme_library/docs/README.md)
+- [CivicTheme Drupal Theme Documentation](./docs/README.md)
 
 ----
 
