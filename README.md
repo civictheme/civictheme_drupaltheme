@@ -38,6 +38,7 @@ ready to be installed and compiled.
 
 Run the following command from within your sub-theme directory:
 
+    npm init
     npm run build
 
 ## Development documentation
