@@ -20,6 +20,7 @@ dependencies:
   - drupal:rest
   - field_group:field_group
   - layout_builder_restrictions:layout_builder_restrictions
+  - linkit:linkit
   - menu_block:menu_block
   - paragraphs:paragraphs
   - pathauto:pathauto
@@ -47,6 +48,9 @@ regions:
   footer_middle_4: 'Footer middle 4'
   footer_bottom_1: 'Footer bottom 1'
   footer_bottom_2: 'Footer bottom 2'
+
+features:
+  - favicon
 
 components:
   namespaces:
