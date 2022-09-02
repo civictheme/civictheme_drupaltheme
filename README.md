@@ -2,7 +2,7 @@
 
 ----
 
-Version: `0.53.1`
+Version: `0.53.2`
 
 ## Introduction
 
