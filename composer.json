@@ -1,7 +1,7 @@
 {
     "name": "salsadigitalauorg/civictheme",
     "description": "CivicTheme is a Drupal 9 component-based theme.",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "type": "drupal-theme",
     "homepage": "https://github.com/salsadigitalauorg/civictheme",
     "support": {
