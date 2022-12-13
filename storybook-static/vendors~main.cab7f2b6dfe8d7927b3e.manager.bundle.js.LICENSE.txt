@@ -51,6 +51,8 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
 /*! store2 - v2.13.1 - 2021-12-20
 * Copyright (c) 2021 Nathan Bubna; Licensed (MIT OR GPL-3.0) */
 
