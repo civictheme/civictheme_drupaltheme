@@ -20,17 +20,7 @@ abstract class CivicthemeUnitTestBase extends UnitTestCase {
   protected function setUp(): void {
     parent::setUp();
 
-    $paths = [
-      '../themes/civictheme/civictheme.theme',
-      '../themes/contrib/civictheme/civictheme.theme',
-      '../themes/custom/civictheme/civictheme.theme',
-    ];
-    foreach ($paths as $path) {
-      if (file_exists($path)) {
-        require_once $path;
-        break;
-      }
-    }
+    require_once __DIR__ . '/../../../civictheme.theme';
   }
 
 }
