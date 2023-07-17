@@ -19,7 +19,18 @@ abstract class CivicthemeUnitTestBase extends UnitTestCase {
    */
   protected function setUp(): void {
     parent::setUp();
-    require_once 'docroot/themes/contrib/civictheme/civictheme.theme';
+
+    $paths = [
+      '../themes/civictheme/civictheme.theme',
+      '../themes/contrib/civictheme/civictheme.theme',
+      '../themes/custom/civictheme/civictheme.theme',
+    ];
+    foreach ($paths as $path) {
+      if (file_exists($path)) {
+        require_once $path;
+        break;
+      }
+    }
   }
 
 }

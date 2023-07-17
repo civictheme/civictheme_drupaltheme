@@ -1,8 +1,10 @@
 # CivicTheme Drupal theme
 
-----
+Drupal 9+ component-based theme.
 
-Version: `1.4.6`
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/salsadigitalauorg/civictheme/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/salsadigitalauorg/civictheme/tree/master)
+
+----
 
 ## Introduction
 
@@ -17,7 +19,7 @@ The Drupal theme provides full integration with a library.
 
 ## Installation
 
-    composer require salsadigitalauorg/civictheme
+    composer require drupal/civictheme
 
 Enable CivicTheme theme to use it as-is - CivicTheme component library is
 already included as a set of compiled assets.

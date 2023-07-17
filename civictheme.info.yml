@@ -89,4 +89,3 @@ components:
 
 ckeditor_stylesheets:
   - dist/civictheme.editor.css
-
