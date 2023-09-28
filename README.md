@@ -1,10 +1,5 @@
 # CivicTheme Drupal theme
 
-
-> :warning: Drupal theme has moved to Drupal.org.<br/>
-> https://www.drupal.org/project/civictheme <br/>
-> This repository will be archived after 1 January 2024. No new releases will be published to this repository after `1.5`. <br/>
-
 Drupal 9+ component-based theme.
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/salsadigitalauorg/civictheme/tree/master.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/salsadigitalauorg/civictheme/tree/master)
