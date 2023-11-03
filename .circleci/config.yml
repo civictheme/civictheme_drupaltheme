@@ -41,8 +41,8 @@ jobs:
     docker:
       - image: cimg/php:8.1-browsers
     environment:
-      DRUPAL_VERSION: 9.5
-      DRUPAL_PROJECT_SHA: 9.x
+      DRUPAL_VERSION: 10.0
+      DRUPAL_PROJECT_SHA: 10.x
     <<: *job-build
 
   build-php-8.2-legacy:
@@ -50,8 +50,8 @@ jobs:
     docker:
       - image: cimg/php:8.2-browsers
     environment:
-      DRUPAL_VERSION: 9.5
-      DRUPAL_PROJECT_SHA: 9.x
+      DRUPAL_VERSION: 10.0
+      DRUPAL_PROJECT_SHA: 10.x
     <<: *job-build
 
   build-php-8.2-next:
