@@ -16,7 +16,7 @@ use Drupal\civictheme\CivicthemeConstants;
  * @see https://www.drush.org/latest/bootstrap
  *
  * Usage:
- * drush --include=docroot/themes/contrib/civictheme/src/Drush command
+ * drush --include=web/themes/contrib/civictheme/src/Drush command
  *
  * phpcs:disable Drupal.Commenting.DocComment.ParamGroup
  * phpcs:disable Drupal.Commenting.FunctionComment.MissingParamType
