@@ -1,8 +1,8 @@
 {
-  "name": "civictheme",
-  "version": "1.6.2",
-  "private": true,
-  "description": "CivicTheme UI kit with Storybook integration.",
+  "name": "@civictheme/uikit",
+  "version": "1.6.3",
+  "license": "GPL-2.0-or-later",
+  "description": "CivicTheme UI Kit with Storybook integration",
   "keywords": [
     "component library",
     "ui kit",
@@ -14,7 +14,6 @@
   "homepage": "https://github.com/salsadigitalauorg/civictheme_library",
   "bugs": "https://github.com/salsadigitalauorg/civictheme_source/issues",
   "repository": "https://github.com/salsadigitalauorg/civictheme_source.git",
-  "license": "GPL-2.0",
   "engines": {
     "node": ">=18.14"
   },
