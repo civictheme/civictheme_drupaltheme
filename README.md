@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> This repository was used as a temporary place for the CivicTheme codebase. 
+>
+> Please find the latest version of the CivicTheme Drupal theme on Drupal.org: www.drupal.org/project/civictheme
+
 # CivicTheme Drupal theme
 
 Drupal 10 component-based theme.
